@@ -189,16 +189,15 @@ Future<String> _buildUploadApp(String projectArn, DeviceType poolType,
   String appArn;
   List<String> command;
   final addFlavor = (String flavor) {
-    //if (!isEmpty(flavor)) {
-      command.addAll(['--flavor', "staging"]);
-    //}
+    if (!isEmpty(flavor)) {
+      command.addAll(['--flavor', flavor]);
+    }
   };
   if (poolType == DeviceType.android) {
     printStatus(
         'Building debug .apk from $mainPath${isEmpty(flavor) ? '' : ' with flavor $flavor'}...');
     command = ['flutter', 'build', 'apk', '-t', mainPath, '--debug'];
     addFlavor(flavor);
-    printStatus('here');
     await streamCmd(command);
     // Upload apk
     String debugApkPath = isEmpty(flavor)
@@ -299,9 +298,6 @@ Future<Map> runSylphJobInIsolate(Map args) async {
   final sylphRunName = args['sylph_run_name'];
   final sylphRunTimeout = args['sylph_run_timeout'];
   final jobVerbose = args['jobVerbose'];
-
-  printStatus("runSylphJobInIsolate");
-  printStatus(config);
 
   // run runSylphTests
   bool succeeded;
