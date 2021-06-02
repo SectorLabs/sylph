@@ -376,7 +376,7 @@ void main() {
         tmp_dir: /tmp/sylph
         artifacts_dir: /tmp/sylph_artifacts
         sylph_timeout: 720 
-        flavor: dev
+        flavor: staging
         concurrent_runs: true
         project_name: test concurrent runs
         default_job_timeout: 10 
